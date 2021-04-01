@@ -1,5 +1,6 @@
 const express = require('express')
 const mongoose = require('mongoose')
+require('dotenv').config()
 const bodyParser = require('body-parser')
 const router = require('./routes/router')
 const controller = require('./controllers/controller')
@@ -10,7 +11,7 @@ app.use(bodyParser.urlencoded({extended: false}))
 
 app.use('/', router)
 
-mongoose.connect('mongodb://mongodb:27017/autosportdb', {
+mongoose.connect(`mongodb://${process.env.MONGO_DB}/autosportdb`, {
     useUnifiedTopology: true,
     useNewUrlParser: true
 }, (err) => {
