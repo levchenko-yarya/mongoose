@@ -1,0 +1,29 @@
+version: '3'
+services:
+  app:
+    container_name: mongoose
+    restart: always
+    build: .
+    volumes:
+      - ./:/usr/src/app
+    ports:
+      - '127.0.0.1:81:3000'
+    depends_on: 
+      - mongo
+    external_links:
+      - mongo
+  mongo:
+    container_name: mongodb
+    image: mongo
+    ports:
+      - '127.0.0.1:27017:27017'
+  mongo-ex:
+    image: mongo-express
+    container_name: mongo-ex
+    ports:
+      - 8081:8081
+    environment:
+      - ME_CONFIG_OPTIONS_EDITORTHEME=ambiance
+      - ME_CONFIG_MONGODB_SERVER=mongodb
+      # - ME_CONFIG_BASICAUTH_USERNAME="user"
+      # - ME_CONFIG_BASICAUTH_PASSWORD="fairly long password"

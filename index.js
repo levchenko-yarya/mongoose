@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({extended: false}))
 
 app.use('/', router)
 
-mongoose.connect('mongodb://localhost:27017/autosportdb', {
+mongoose.connect('mongodb://mongodb:27017/autosportdb', {
     useUnifiedTopology: true,
     useNewUrlParser: true
 }, (err) => {

@@ -1,6 +1,6 @@
 const Sport = require('../model/sport')
-const Team = require('../model/sport')
-const Driver = require('../model/sport')
+// const Team = require('../model/sport')
+// const Driver = require('../model/sport')
 
 exports.get = (request, response) => {
     response.render('welcome.hbs')
@@ -11,19 +11,16 @@ exports.add = (request, response) => {
 }
 
 exports.post = (request, response) => {
-   
-    const sport = new Sport({ 
-        year: request.body.year, 
-        category: request.body.category, 
-    })
-    sport.insertOne({ driver: request.body.driver })
-    sport.insertOne({ team: request.body.team })
-    sport.save((err)=>{
-        if(err) return console.log(err)
-        console.log("Обьект сохранён", sport)
-    })
-    
-    
+    Sport.create({ year: request.body.year,
+                   category:request.body.category, 
+                   team: {
+                       team:request.body.team,
+                       driver:{
+                           driver:request.body.driver
+                       }
+                   }
+                }) 
+    response.render('welcome.hbs')
 }
 
 
